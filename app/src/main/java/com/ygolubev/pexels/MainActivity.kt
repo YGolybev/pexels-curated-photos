@@ -3,6 +3,7 @@ package com.ygolubev.pexels
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.ygolubev.pexels.ui.PexelsListScreen
 import com.ygolubev.pexels.ui.theme.PexelsTheme
 
 class MainActivity : ComponentActivity() {
@@ -10,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PexelsTheme {
-
+                PexelsListScreen()
             }
         }
     }

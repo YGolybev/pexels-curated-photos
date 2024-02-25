@@ -10,22 +10,20 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-
-data class PexelsImageUiModel(
-    val imageModel: Any,
-    val author: String,
-    val alt: String,
-)
+import coil.request.ImageRequest
+import coil.size.Size
 
 @Preview
 @Composable
 private fun PexelsImagePreview() {
     PexelsImage(
         model = PexelsImageUiModel(
-            imageModel = "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&cs=tinysrgb&h=350",
+            imageModel = "",
             author = "Author Name",
             alt = "Content description"
         ),
@@ -34,20 +32,24 @@ private fun PexelsImagePreview() {
 }
 
 @Composable
-fun PexelsImage(
+internal fun PexelsImage(
     model: PexelsImageUiModel,
-    onClick: () -> Unit,
+    onClick: (PexelsImageUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(
-        onClick = onClick,
+        onClick = { onClick(model) },
         modifier = modifier
             .padding(all = 8.dp)
             .fillMaxWidth()
             .wrapContentHeight(),
     ) {
         AsyncImage(
-            model = model.imageModel,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(model.imageModel)
+                .size(Size.ORIGINAL)
+                .build(),
+            contentScale = ContentScale.FillWidth,
             contentDescription = model.alt,
             modifier = Modifier
                 .fillMaxWidth()
