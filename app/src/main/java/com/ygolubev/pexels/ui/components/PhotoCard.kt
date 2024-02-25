@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Size
-import com.ygolubev.pexels.ui.screens.CuratedPhotoUiModel
+import com.ygolubev.pexels.ui.model.CuratedPhotoUiModel
 
 @Preview
 @Composable
@@ -23,7 +23,7 @@ private fun PhotoCardPreview() {
         model = CuratedPhotoUiModel(
             imageModel = "",
             author = "Author Name",
-            alt = "Content description"
+            description = "Content description"
         ),
         onClick = {}
     )
@@ -48,7 +48,7 @@ internal fun PhotoCard(
                 .size(Size.ORIGINAL)
                 .build(),
             contentScale = ContentScale.FillWidth,
-            contentDescription = model.alt,
+            contentDescription = model.description,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pexels</string>
+    <string name="paging_append_load_failed">We failed to load curated photos :(</string>
 </resources>

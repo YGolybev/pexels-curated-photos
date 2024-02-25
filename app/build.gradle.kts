@@ -71,6 +71,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material")
+
+    implementation("androidx.paging:paging-compose:3.2.1")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
@@ -81,9 +85,11 @@ dependencies {
     // ktor
     implementation(platform("io.ktor:ktor-bom:2.3.8"))
     implementation("io.ktor:ktor-client-core")
+    implementation("io.ktor:ktor-client-android")
     implementation("io.ktor:ktor-client-okhttp")
     implementation("io.ktor:ktor-client-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
+    implementation("io.ktor:ktor-client-logging")
 
     // dependency injection
     implementation(platform("io.insert-koin:koin-bom:3.5.3"))

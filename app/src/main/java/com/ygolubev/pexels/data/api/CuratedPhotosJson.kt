@@ -6,5 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal data class CuratedPhotosJson(
     @SerialName("photos")
-    val photos: List<PhotoJson>
+    val photos: List<PhotoJson>,
+    @SerialName("next_page")
+    val nextPage: String?,
 )
