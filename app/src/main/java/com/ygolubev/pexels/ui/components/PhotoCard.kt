@@ -1,12 +1,9 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
-package com.ygolubev.pexels.ui
+package com.ygolubev.pexels.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,12 +14,13 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Size
+import com.ygolubev.pexels.ui.screens.CuratedPhotoUiModel
 
 @Preview
 @Composable
-private fun PexelsImagePreview() {
-    PexelsImage(
-        model = PexelsImageUiModel(
+private fun PhotoCardPreview() {
+    PhotoCard(
+        model = CuratedPhotoUiModel(
             imageModel = "",
             author = "Author Name",
             alt = "Content description"
@@ -32,9 +30,9 @@ private fun PexelsImagePreview() {
 }
 
 @Composable
-internal fun PexelsImage(
-    model: PexelsImageUiModel,
-    onClick: (PexelsImageUiModel) -> Unit,
+internal fun PhotoCard(
+    model: CuratedPhotoUiModel,
+    onClick: (CuratedPhotoUiModel) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(

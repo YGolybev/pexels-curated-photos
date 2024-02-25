@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.ygolubev.pexels.ui
+package com.ygolubev.pexels.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,17 +16,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ygolubev.pexels.ui.components.PhotoCard
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
-internal fun PexelsListScreen(
-    model: PexelsListViewModel = viewModel()
+internal fun CuratedPhotosScreen(
+    model: CuratedPhotosViewModel = koinViewModel()
 ) {
     val state by model.state.collectAsState()
 
     val pullToRefreshState = rememberPullToRefreshState()
+
+    LaunchedEffect(Unit) {
+        model.refresh()
+    }
 
     if (pullToRefreshState.isRefreshing) {
         LaunchedEffect(Unit) {
@@ -40,10 +45,10 @@ internal fun PexelsListScreen(
         modifier = Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
     ) {
         LazyColumn(content = {
-            items(state.pexels) { pexel ->
-                PexelsImage(
-                    model = pexel,
-                    onClick = model::openPexel,
+            items(state.photos) { photo ->
+                PhotoCard(
+                    model = photo,
+                    onClick = model::openPhoto,
                 )
             }
         })
