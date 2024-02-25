@@ -10,7 +10,11 @@ internal data class PhotoJson(
     @SerialName("src")
     val src: PhotoSrcJson,
     @SerialName("alt")
-    val alt: String,
+    val description: String,
+    @SerialName("width")
+    val width: Int,
+    @SerialName("height")
+    val height: Int,
 )
 
 @Serializable

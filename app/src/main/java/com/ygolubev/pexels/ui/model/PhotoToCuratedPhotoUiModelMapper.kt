@@ -15,6 +15,7 @@ internal class PhotoToCuratedPhotoUiModelMapperImpl : PhotoToCuratedPhotoUiModel
             imageModel = photo.imageUrl,
             author = photo.authorName,
             description = photo.description,
+            aspectRatio = photo.aspectRatio,
         )
 
 }

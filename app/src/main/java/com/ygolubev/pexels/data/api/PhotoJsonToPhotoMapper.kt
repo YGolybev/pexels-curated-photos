@@ -14,7 +14,8 @@ internal class PhotoJsonToPhotoMapperImpl : PhotoJsonToPhotoMapper {
         Photo(
             imageUrl = json.src.medium,
             authorName = json.photographer,
-            description = json.alt,
+            description = json.description,
+            aspectRatio = json.width.toFloat() / json.height,
         )
 
 }

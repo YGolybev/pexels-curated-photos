@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.map
 @Immutable
 internal data class CuratedPhotoUiModel(
     val imageModel: Any,
+    val aspectRatio: Float,
     val author: String,
     val description: String,
 )
