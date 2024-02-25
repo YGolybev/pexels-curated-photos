@@ -18,7 +18,25 @@ internal data class PexelsImageUiModel(
 
 internal class PexelsListViewModel : ViewModel() {
 
-    val state = MutableStateFlow(PexelsListUiModel())
+    val state = MutableStateFlow(PexelsListUiModel(
+        pexels = listOf(
+            PexelsImageUiModel(
+                imageModel = "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&cs=tinysrgb&h=350",
+                author = "Author Name",
+                alt = "Content description"
+            ),
+            PexelsImageUiModel(
+                imageModel = "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&cs=tinysrgb&h=350",
+                author = "Author Name",
+                alt = "Content description"
+            ),
+            PexelsImageUiModel(
+                imageModel = "https://images.pexels.com/photos/2880507/pexels-photo-2880507.jpeg?auto=compress&cs=tinysrgb&h=350",
+                author = "Author Name",
+                alt = "Content description"
+            )
+        )
+    ))
 
     fun openPexel(pexel: PexelsImageUiModel) {
         // TODO
