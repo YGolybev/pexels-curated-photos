@@ -6,6 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ygolubev.pexels.ui.components.scaleEnterTransition
+import com.ygolubev.pexels.ui.components.scaleExitTransition
+import com.ygolubev.pexels.ui.components.slideInEnterTransition
+import com.ygolubev.pexels.ui.components.slideOutExitTransition
 import com.ygolubev.pexels.ui.model.AppViewModel
 import com.ygolubev.pexels.ui.navigation.Destination
 import com.ygolubev.pexels.ui.navigation.NavigationGraph.ARG_PHOTO_ID
@@ -30,18 +34,24 @@ internal fun PexelsApp(
             navController = navController,
             startDestination = curated,
         ) {
-            composable(curated) {
+            composable(
+                route = curated,
+                enterTransition = scaleEnterTransition(),
+                exitTransition = scaleExitTransition(),
+            ) {
                 CuratedPhotosScreen()
             }
 
-            composable(details("{${ARG_PHOTO_ID}}")) {
-                PhotoDetailsScreen()
-            }
+            composable(
+                route = details("{${ARG_PHOTO_ID}}"),
+                enterTransition = slideInEnterTransition(),
+                exitTransition = slideOutExitTransition(),
+            ) { PhotoDetailsScreen() }
         }
     }
 }
 
-internal fun NavHostController.handleDestination(destination: Destination) {
+private fun NavHostController.handleDestination(destination: Destination) {
     when (destination) {
         Destination.CuratedPhotos ->
             navigate(curated)

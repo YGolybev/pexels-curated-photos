@@ -43,7 +43,7 @@ internal fun PhotoCard(
     val state = painter.state
 
     ElevatedCard(
-        onClick = {
+        onClick = debounced {
             if (state is AsyncImagePainter.State.Success) {
                 onClick(model)
             }
