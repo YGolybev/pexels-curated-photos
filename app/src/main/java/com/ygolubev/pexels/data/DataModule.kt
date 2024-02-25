@@ -1,22 +1,12 @@
-package com.ygolubev.pexels
+package com.ygolubev.pexels.data
 
 import android.util.Log
-import androidx.paging.PagingSource
-import com.ygolubev.pexels.data.Photo
-import com.ygolubev.pexels.data.PhotosPagingSource
-import com.ygolubev.pexels.data.PhotosRepository
-import com.ygolubev.pexels.data.PhotosRepositoryImpl
+import com.ygolubev.pexels.BuildConfig
+import com.ygolubev.pexels.R
 import com.ygolubev.pexels.data.api.PexelsApi
 import com.ygolubev.pexels.data.api.PexelsApiImpl
 import com.ygolubev.pexels.data.api.PhotoJsonToPhotoMapper
 import com.ygolubev.pexels.data.api.PhotoJsonToPhotoMapperImpl
-import com.ygolubev.pexels.ui.model.AppViewModel
-import com.ygolubev.pexels.ui.model.CuratedPhotosViewModel
-import com.ygolubev.pexels.ui.model.PhotoDetailsViewModel
-import com.ygolubev.pexels.ui.model.PhotoToCuratedPhotoUiModelMapper
-import com.ygolubev.pexels.ui.model.PhotoToCuratedPhotoUiModelMapperImpl
-import com.ygolubev.pexels.ui.navigation.Navigator
-import com.ygolubev.pexels.ui.navigation.NavigatorImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.cache.HttpCache
@@ -30,7 +20,6 @@ import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -77,22 +66,6 @@ internal val dataModule = module {
     singleOf(::PhotosRepositoryImpl) {
         bind<PhotosRepository>()
     }
-    singleOf(::PhotosPagingSource) {
-        bind<PagingSource<Int, Photo>>()
-    }
 }
 
-internal val uiModule = module {
-    singleOf(::NavigatorImpl) {
-        bind<Navigator>()
-    }
 
-    viewModelOf(::AppViewModel)
-
-    singleOf(::PhotoToCuratedPhotoUiModelMapperImpl) {
-        bind<PhotoToCuratedPhotoUiModelMapper>()
-    }
-    viewModelOf(::CuratedPhotosViewModel)
-
-    viewModelOf(::PhotoDetailsViewModel)
-}

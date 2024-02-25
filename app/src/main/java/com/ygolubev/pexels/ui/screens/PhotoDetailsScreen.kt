@@ -39,7 +39,7 @@ internal fun PhotoDetailsScreen(
 
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
-            .data(photo?.thumbnailModel)
+            .data(photo?.originalModel)
             .scale(Scale.FIT)
             .setParameter(COIL_RETRY_KEY, retryKey, null)
             .build(),

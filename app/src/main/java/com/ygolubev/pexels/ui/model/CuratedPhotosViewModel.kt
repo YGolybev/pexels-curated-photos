@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.ygolubev.pexels.data.Photo
+import com.ygolubev.pexels.data.PhotosPagingSource
+import com.ygolubev.pexels.data.PhotosRepository
 import com.ygolubev.pexels.ui.navigation.Destination
 import com.ygolubev.pexels.ui.navigation.Navigator
 import kotlinx.coroutines.flow.map
@@ -24,15 +24,15 @@ internal data class CuratedPhotoUiModel(
 )
 
 internal class CuratedPhotosViewModel(
-    private val photosPagingSource: PagingSource<Int, Photo>,
+    private val photosRepository: PhotosRepository,
     private val photoToCuratedPhotoUiModelMapper: PhotoToCuratedPhotoUiModelMapper,
     private val navigator: Navigator,
 ) : ViewModel() {
 
     val photos = Pager(
         config = PagingConfig(20),
-    ) { photosPagingSource }
-        .flow
+        pagingSourceFactory = { PhotosPagingSource(photosRepository) },
+    ).flow
         .cachedIn(viewModelScope)
         .map { it.map(photoToCuratedPhotoUiModelMapper::map) }
 

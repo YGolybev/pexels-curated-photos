@@ -4,6 +4,7 @@ package com.ygolubev.pexels.ui.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -67,7 +68,9 @@ internal fun CuratedPhotosScreen(
             .fillMaxSize()
             .pullRefresh(pullRefreshState)
     ) {
-        LazyColumn(content = {
+        LazyColumn(
+            contentPadding = PaddingValues(8.dp)
+        ) {
             if (refreshState is LoadState.Error && itemCount == 0) {
                 // show fullscreen error if there's no content
                 item {
@@ -91,7 +94,7 @@ internal fun CuratedPhotosScreen(
                     onRetryClick = photos::retry,
                 )
             }
-        })
+        }
 
         PullRefreshIndicator(
             refreshing = isRefreshing,

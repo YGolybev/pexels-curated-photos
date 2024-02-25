@@ -4,6 +4,8 @@ import android.app.Application
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.disk.DiskCache
+import com.ygolubev.pexels.data.dataModule
+import com.ygolubev.pexels.ui.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
