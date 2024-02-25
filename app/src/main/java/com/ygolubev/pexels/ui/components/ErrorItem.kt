@@ -11,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ygolubev.pexels.R
 
 @Composable
 internal fun ErrorItem(
+    text: String,
     onRetryClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -27,8 +29,9 @@ internal fun ErrorItem(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = stringResource(id = R.string.paging_append_load_failed),
+            text = text,
             color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center,
         )
 
         Button(
@@ -36,6 +39,7 @@ internal fun ErrorItem(
         ) {
             Text(
                 text = stringResource(R.string.retry),
+                textAlign = TextAlign.Center,
             )
         }
     }

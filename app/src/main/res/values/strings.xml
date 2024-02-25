@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Pexels</string>
     <string name="close">Close</string>
-    <string name="paging_append_load_failed">We failed to load curated photos :(</string>
+    <string name="paging_refresh_load_failed">We failed to load curated photos :(</string>
+    <string name="paging_append_load_failed">We failed to load more curated photos :(</string>
+    <string name="photo_load_failed">We failed to load this photo :(</string>
     <string name="retry">Retry</string>
 </resources>

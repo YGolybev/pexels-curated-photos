@@ -72,6 +72,7 @@ internal fun CuratedPhotosScreen(
                 // show fullscreen error if there's no content
                 item {
                     ErrorItem(
+                        text = stringResource(id = R.string.paging_refresh_load_failed),
                         onRetryClick = photos::retry,
                         modifier = Modifier.fillParentMaxSize(),
                     )
@@ -110,7 +111,7 @@ internal fun LazyListScope.appendState(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 16.dp),
+                    .padding(all = 32.dp),
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
@@ -120,6 +121,7 @@ internal fun LazyListScope.appendState(
 
         is LoadState.Error -> item {
             ErrorItem(
+                text = stringResource(id = R.string.paging_append_load_failed),
                 onRetryClick = onRetryClick,
             )
         }
