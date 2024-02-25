@@ -10,11 +10,17 @@ import com.ygolubev.pexels.data.api.PexelsApi
 import com.ygolubev.pexels.data.api.PexelsApiImpl
 import com.ygolubev.pexels.data.api.PhotoJsonToPhotoMapper
 import com.ygolubev.pexels.data.api.PhotoJsonToPhotoMapperImpl
+import com.ygolubev.pexels.ui.model.AppViewModel
 import com.ygolubev.pexels.ui.model.CuratedPhotosViewModel
+import com.ygolubev.pexels.ui.model.PhotoDetailsViewModel
 import com.ygolubev.pexels.ui.model.PhotoToCuratedPhotoUiModelMapper
 import com.ygolubev.pexels.ui.model.PhotoToCuratedPhotoUiModelMapperImpl
+import com.ygolubev.pexels.ui.navigation.Navigator
+import com.ygolubev.pexels.ui.navigation.NavigatorImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.cache.HttpCache
+import io.ktor.client.plugins.cache.storage.FileStorage
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -24,6 +30,7 @@ import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -39,6 +46,15 @@ internal val dataModule = module {
                 json(Json {
                     ignoreUnknownKeys = true
                 })
+            }
+            install(HttpCache) {
+                publicStorage(
+                    FileStorage(
+                        androidContext()
+                            .cacheDir
+                            .resolve("http_cache")
+                    )
+                )
             }
             install(Logging) {
                 logger = object : Logger {
@@ -67,8 +83,16 @@ internal val dataModule = module {
 }
 
 internal val uiModule = module {
+    singleOf(::NavigatorImpl) {
+        bind<Navigator>()
+    }
+
+    viewModelOf(::AppViewModel)
+
     singleOf(::PhotoToCuratedPhotoUiModelMapperImpl) {
         bind<PhotoToCuratedPhotoUiModelMapper>()
     }
-    singleOf(::CuratedPhotosViewModel)
+    viewModelOf(::CuratedPhotosViewModel)
+
+    viewModelOf(::PhotoDetailsViewModel)
 }

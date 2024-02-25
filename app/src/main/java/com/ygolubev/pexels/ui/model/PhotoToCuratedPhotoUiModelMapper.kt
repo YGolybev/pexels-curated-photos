@@ -12,7 +12,8 @@ internal class PhotoToCuratedPhotoUiModelMapperImpl : PhotoToCuratedPhotoUiModel
 
     override fun map(photo: Photo): CuratedPhotoUiModel =
         CuratedPhotoUiModel(
-            imageModel = photo.imageUrl,
+            id = photo.id,
+            imageModel = photo.thumbnailModel,
             author = photo.authorName,
             description = photo.description,
             aspectRatio = photo.aspectRatio,

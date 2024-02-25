@@ -9,10 +9,14 @@ import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.ygolubev.pexels.data.Photo
+import com.ygolubev.pexels.ui.navigation.Destination
+import com.ygolubev.pexels.ui.navigation.Navigator
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 @Immutable
 internal data class CuratedPhotoUiModel(
+    val id: String,
     val imageModel: Any,
     val aspectRatio: Float,
     val author: String,
@@ -22,6 +26,7 @@ internal data class CuratedPhotoUiModel(
 internal class CuratedPhotosViewModel(
     private val photosPagingSource: PagingSource<Int, Photo>,
     private val photoToCuratedPhotoUiModelMapper: PhotoToCuratedPhotoUiModelMapper,
+    private val navigator: Navigator,
 ) : ViewModel() {
 
     val photos = Pager(
@@ -32,7 +37,9 @@ internal class CuratedPhotosViewModel(
         .map { it.map(photoToCuratedPhotoUiModelMapper::map) }
 
     fun openPhoto(photo: CuratedPhotoUiModel) {
-        // TODO
+        viewModelScope.launch {
+            navigator.navigate(Destination.PhotoDetails(photo.id))
+        }
     }
 
 }

@@ -43,7 +43,6 @@ internal fun PhotoCard(
             contentScale = ContentScale.FillWidth,
             contentDescription = model.description,
             modifier = Modifier
-                .fillMaxWidth()
                 .then(
                     if (painter.state !is AsyncImagePainter.State.Success)
                         Modifier.aspectRatio(model.aspectRatio)

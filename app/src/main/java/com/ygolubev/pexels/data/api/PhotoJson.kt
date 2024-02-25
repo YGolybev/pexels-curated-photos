@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class PhotoJson(
+    @SerialName("id")
+    val id: Long,
     @SerialName("photographer")
     val photographer: String,
     @SerialName("src")
@@ -19,6 +21,8 @@ internal data class PhotoJson(
 
 @Serializable
 internal data class PhotoSrcJson(
-    @SerialName("medium")
-    val medium: String,
+    @SerialName("original")
+    val original: String,
+    @SerialName("large")
+    val large: String,
 )

@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
     kotlin("plugin.serialization") version "1.9.22"
 }
 
@@ -59,9 +60,10 @@ android {
 
 dependencies {
     // kotlin
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
 
     // android
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     // compose
@@ -73,6 +75,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material")
 
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.paging:paging-compose:3.2.1")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
