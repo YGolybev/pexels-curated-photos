@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
 import com.ygolubev.pexels.R
+import com.ygolubev.pexels.ui.components.ImageLoadingStateItem
 import com.ygolubev.pexels.ui.model.PhotoDetailsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -31,10 +35,13 @@ internal fun PhotoDetailsScreen(
 ) {
     val photo by model.photo.collectAsState(initial = null)
 
+    var retryKey by remember { mutableStateOf(0) }
+
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(photo?.thumbnailModel)
             .scale(Scale.FIT)
+            .setParameter(COIL_RETRY_KEY, retryKey, null)
             .build(),
     )
 
@@ -43,6 +50,12 @@ internal fun PhotoDetailsScreen(
             .background(Color.Black)
             .fillMaxSize(),
     ) {
+        ImageLoadingStateItem(
+            state = painter.state,
+            onRetryClick = { retryKey++ },
+            modifier = Modifier.align(Alignment.Center)
+        )
+
         Image(
             painter = painter,
             contentScale = ContentScale.Fit,
@@ -64,3 +77,5 @@ internal fun PhotoDetailsScreen(
         )
     }
 }
+
+private const val COIL_RETRY_KEY = "retry_key"

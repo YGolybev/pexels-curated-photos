@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,13 +28,14 @@ internal fun ErrorItem(
     ) {
         Text(
             text = stringResource(id = R.string.paging_append_load_failed),
+            color = MaterialTheme.colorScheme.primary,
         )
 
         Button(
             onClick = onRetryClick,
         ) {
             Text(
-                text = "Retry",
+                text = stringResource(R.string.retry),
             )
         }
     }
