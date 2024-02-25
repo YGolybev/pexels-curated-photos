@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/assetWizardSettings.xml
+/caches
+/compiler.xml
+/deploymentTargetDropDown.xml
+/gradle.xml
+/kotlinc.xml
+/libraries
+/migrations.xml
+/misc.xml
+/modules.xml
+/navEditor.xml
+/vcs.xml
+/workspace.xml
